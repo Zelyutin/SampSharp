@@ -37,8 +37,7 @@ namespace SampSharp.GameMode.SAMP.Commands
         /// <exception cref="ArgumentNullException"></exception>
         public CommandsManager(BaseMode gameMode)
         {
-            if (gameMode == null) throw new ArgumentNullException(nameof(gameMode));
-            GameMode = gameMode;
+            GameMode = gameMode ?? throw new ArgumentNullException(nameof(gameMode));
         }
 
         #region Implementation of IService
@@ -89,6 +88,7 @@ namespace SampSharp.GameMode.SAMP.Commands
 
             return Activator.CreateInstance(type) as IPermissionChecker;
         }
+
         private static IEnumerable<IPermissionChecker> GetCommandPermissionCheckers(Type type)
         {
             if (type == null || type == typeof(object))

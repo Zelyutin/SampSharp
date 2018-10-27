@@ -25,6 +25,8 @@ using SampSharp.GameMode.World;
 
 namespace TestMode
 {
+
+
     internal class GameMode : BaseMode
     {
         #region Overrides of BaseMode
@@ -77,6 +79,10 @@ namespace TestMode
         protected override void OnPlayerConnected(BasePlayer player, EventArgs e)
         {
             Console.WriteLine($"Player {player.Name} connected.");
+
+            player.SetCheckpoint(new Vector3(6, 6, 6), 3);
+            player.EnterCheckpoint += (sender, args) => player.SendClientMessage("Checkpoint entered!");
+
             base.OnPlayerConnected(player, e);
         }
 
